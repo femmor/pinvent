@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "backend": "nodemon server.js"
+    "backend": "nodemon server.js",
+    "dev": "concurrently \" npm run backend \" \" cd ../frontend && npm start \" "
   },
   "keywords": [],
   "author": "Emmanuel Egomson",
