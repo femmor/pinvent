@@ -2,10 +2,4 @@
 
 ## Technologies
 
-Frontend - ReactJS & SCSS
-Backend - NodesJS & Express
-State management - Redux Toolkit
-Image Storage - Cloudinary
-Email - Nodemailer & Outlook (Sendgrid for Production)
-Frontend deployment - Vercel
-Backend deployment - Render
+Frontend - ReactJS & SCSS<br>Backend - NodesJS & Express<br>State management - Redux Toolkit<br>Image Storage - Cloudinary<br>Email - Nodemailer & Outlook (Sendgrid for Production)<br>Frontend deployment - Vercel<br>Backend deployment - Render
