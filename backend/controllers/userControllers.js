@@ -1,5 +1,10 @@
 // Register user controller
-const registerUser = async (req, res) => {
+const registerUser = (req, res) => {
+  if (!req.body.email) {
+    res.status(404);
+    throw new Error('Please enter an email address');
+  }
+
   res.send('Register user controller');
 };
 

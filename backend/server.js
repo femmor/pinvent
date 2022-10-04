@@ -10,6 +10,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const connectDB = require('./config/connectDB');
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const errorHandler = require('./middleware/errorHandler');
 const userRoutes = require('./routes/userRoutes');
 
 // Initialize dotenv
@@ -22,6 +24,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 
 app.use('/api/users', userRoutes);
@@ -32,6 +35,9 @@ app.get('/', (req, res) => {
 });
 
 const PORT = process.env.PORT || 3001;
+
+// Error middleware
+app.use(errorHandler);
 
 // initialize server
 const startServer = async () => {
