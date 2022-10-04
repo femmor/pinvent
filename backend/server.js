@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(bodyParser.json());
 
-app.user('/api/users', userRoutes);
+app.use('/api/users', userRoutes);
 
 // Routes
 app.get('/', (req, res) => {
