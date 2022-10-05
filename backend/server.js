@@ -12,6 +12,7 @@ const connectDB = require('./config/connectDB');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const errorHandler = require('./middleware/errorHandler');
+const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/userRoutes');
 
 // Initialize dotenv
@@ -22,6 +23,7 @@ const app = express();
 
 // Middleware
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(morgan('dev'));
