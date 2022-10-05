@@ -150,8 +150,16 @@ const logOut = asyncHandler((req, res) => {
   });
 });
 
+/**
+ *
+ * Get user information
+ *
+ */
+const getUserData = asyncHandler(async (req, res) => {});
+
 module.exports = {
   registerUser,
   loginUser,
   logOut,
+  getUserData,
 };
