@@ -183,7 +183,31 @@ const getUserData = asyncHandler(async (req, res) => {
  */
 
 const getLogInStatus = asyncHandler(async (req, res) => {
-  res.send('Logged in status');
+  const token = req.cookies.token;
+
+  // Check if there is no token
+  if (!token) {
+    return res.json(false);
+  }
+
+  // Check if the token is valid
+  const verified = jwt.verify(token, process.env.JWT_SECRET);
+
+  if (verified) {
+    return res.json(true);
+  }
+
+  return res.json(false);
+});
+
+/**
+ *
+ * Update user information
+ *
+ */
+
+const updateUser = asyncHandler(async (req, res) => {
+  res.send('Updating user information');
 });
 
 module.exports = {
@@ -192,4 +216,5 @@ module.exports = {
   logOut,
   getUserData,
   getLogInStatus,
+  updateUser,
 };
