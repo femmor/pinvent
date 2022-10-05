@@ -9,7 +9,12 @@ const generateToken = id => {
   });
 };
 
-// Register user controller
+/**
+ *
+ * Register user controller
+ *
+ */
+
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -66,6 +71,16 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
+/**
+ *
+ * Login user controller
+ *
+ */
+const loginUser = asyncHandler(async (req, res) => {
+  res.send('Login route');
+});
+
 module.exports = {
   registerUser,
+  loginUser,
 };
