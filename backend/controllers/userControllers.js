@@ -12,6 +12,22 @@ const generateToken = id => {
 
 /**
  *
+ * Get Users
+ *
+ */
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find();
+
+  if (users) {
+    res.status(200).send(users);
+  } else {
+    res.status(400);
+    throw new Error('No users found!');
+  }
+});
+
+/**
+ *
  * Register user controller
  *
  */
@@ -55,10 +71,10 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   if (user) {
-    const { _id, name, email, photo, phone, bio } = user;
+    const { id, name, email, photo, phone, bio } = user;
 
     res.status(201).json({
-      _id,
+      id,
       name,
       email,
       photo,
@@ -110,10 +126,10 @@ const loginUser = asyncHandler(async (req, res) => {
   });
 
   if (user && passwordIsCorrect) {
-    const { _id, name, email, photo, phone, bio } = user;
+    const { id, name, email, photo, phone, bio } = user;
 
     res.status(200).json({
-      _id,
+      id,
       name,
       email,
       photo,
@@ -160,10 +176,10 @@ const getUserData = asyncHandler(async (req, res) => {
 
   // If user was found
   if (user) {
-    const { _id, name, email, photo, phone, bio } = user;
+    const { id, name, email, photo, phone, bio } = user;
 
     res.status(200).json({
-      _id,
+      id,
       name,
       email,
       photo,
@@ -220,7 +236,7 @@ const updateUser = asyncHandler(async (req, res) => {
 
     const updatedUser = await user.save();
     res.status(200).json({
-      _id: updatedUser._id,
+      id: updatedUser.id,
       name: updatedUser.name,
       email: updatedUser.email,
       photo: updatedUser.photo,
@@ -241,7 +257,7 @@ const updateUser = asyncHandler(async (req, res) => {
 
 const changePassword = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
-  const { oldPassword, password } = req.body;
+  const { oldPassword, newPassword } = req.body;
 
   // Check if user exists
   if (!user) {
@@ -250,7 +266,7 @@ const changePassword = asyncHandler(async (req, res) => {
   }
 
   // Validate
-  if (!oldPassword || !password) {
+  if (!oldPassword || !newPassword) {
     res.status(400);
     throw new Error('Please add old and new password');
   }
@@ -259,7 +275,8 @@ const changePassword = asyncHandler(async (req, res) => {
   const passwordCorrect = await bcrypt.compare(oldPassword, user.password);
 
   if (user && passwordCorrect) {
-    user.password = password;
+    user.password = newPassword;
+
     await user.save();
     res.status(200).json({
       message: 'Password changed successfully!',
@@ -274,6 +291,7 @@ module.exports = {
   registerUser,
   loginUser,
   logOut,
+  getUsers,
   getUserData,
   getLogInStatus,
   updateUser,

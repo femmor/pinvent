@@ -3,6 +3,7 @@ const {
   registerUser,
   loginUser,
   logOut,
+  getUsers,
   getUserData,
   getLogInStatus,
   updateUser,
@@ -15,6 +16,7 @@ const router = express.Router();
 router.post('/register', registerUser);
 router.post('/login', loginUser);
 router.get('/logout', logOut);
+router.get('/', protectRoute, getUsers);
 router.get('/user', protectRoute, getUserData);
 router.get('/loginStatus', getLogInStatus);
 router.patch('/updateUser', protectRoute, updateUser);
