@@ -316,6 +316,32 @@ const forgotPassword = asyncHandler(async (req, res) => {
     .digest('hex');
 
   // Save token to DB
+  const newToken = new Token({
+    user: user.id,
+    token: hashedToken,
+    createdAt: new Date(),
+    expiresAt: Date.now() + 30 * (60 * 1000), // 30mins,
+  });
+
+  await newToken.save();
+
+  // Construct reset url
+  const resetUrl = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+
+  // Send reset email
+  const emailMessage = `
+    <h2>Hello ${user.name}</h2>
+    <p>Please use the link below to reset your password:</p>
+    <p><a href=${resetUrl} clickTracking="off">${resetUrl}</a></p>
+
+    <p>The reset link is valid for 30 minutes.</p>
+
+    <h3>If you did not request this, please ignore this email.</h3>
+
+    <p>Regards</p>
+    <p>PInvent Team</p>
+
+  `;
 });
 
 module.exports = {
