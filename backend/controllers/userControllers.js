@@ -172,7 +172,7 @@ const logOut = asyncHandler((req, res) => {
  *
  */
 const getUserData = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.user.id);
 
   // If user was found
   if (user) {
@@ -223,7 +223,7 @@ const getLogInStatus = asyncHandler(async (req, res) => {
  */
 
 const updateUser = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.user.id);
 
   if (user) {
     const { name, email, photo, phone, bio } = user;
@@ -256,7 +256,7 @@ const updateUser = asyncHandler(async (req, res) => {
  */
 
 const changePassword = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.user.id);
   const { oldPassword, newPassword } = req.body;
 
   // Check if user exists
