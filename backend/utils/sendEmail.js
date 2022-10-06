@@ -9,6 +9,9 @@ const sendEmail = async (subject, message, send_to, sent_from, reply_to) => {
       user: process.env.EMAIL_USER, // generated ethereal user
       pass: process.env.EMAIL_PASS, // generated ethereal password
     },
+    tls: {
+      rejectUnauthorized: false,
+    },
   });
 
   // options for sending email

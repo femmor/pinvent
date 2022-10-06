@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const Token = require('../models/tokenModel');
 const crypto = require('crypto');
+const sendEmail = require('../utils/sendEmail');
 
 // Generate token function
 const generateToken = id => {
@@ -306,6 +307,13 @@ const forgotPassword = asyncHandler(async (req, res) => {
     throw new Error('User does not exist.');
   }
 
+  // Delete token if it exists in the DB
+  let token = await Token.findOne({ userId: user.id });
+
+  if (token) {
+    await token.deleteOne();
+  }
+
   // Create reset token
   let resetToken = crypto.randomBytes(32).toString('hex') + user.id;
 
@@ -317,7 +325,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
 
   // Save token to DB
   const newToken = new Token({
-    user: user.id,
+    userId: user.id,
     token: hashedToken,
     createdAt: new Date(),
     expiresAt: Date.now() + 30 * (60 * 1000), // 30mins,
@@ -328,8 +336,14 @@ const forgotPassword = asyncHandler(async (req, res) => {
   // Construct reset url
   const resetUrl = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
 
-  // Send reset email
-  const emailMessage = `
+  /**
+   *
+   * Send email args
+   *
+   */
+
+  // message
+  const message = `
     <h2>Hello ${user.name}</h2>
     <p>Please use the link below to reset your password:</p>
     <p><a href=${resetUrl} clickTracking="off">${resetUrl}</a></p>
@@ -342,6 +356,27 @@ const forgotPassword = asyncHandler(async (req, res) => {
     <p>PInvent Team</p>
 
   `;
+
+  // subject
+  const subject = `Password reset for ${user.name}`;
+
+  // send to
+  const send_to = user.email;
+
+  // sent from
+  const sent_from = process.env.EMAIL_USER || 'noreply@pinvent.com';
+
+  try {
+    await sendEmail(subject, message, send_to, sent_from);
+    res.status(200).json({
+      success: true,
+      message: 'Reset email sent successfully!',
+    });
+  } catch (error) {
+    res.status(500);
+    // throw new Error('Email not sent, please try again!');
+    res.send(error.message);
+  }
 });
 
 module.exports = {
