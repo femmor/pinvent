@@ -316,6 +316,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
 
   // Create reset token
   let resetToken = crypto.randomBytes(32).toString('hex') + user.id;
+  console.log(resetToken);
 
   // hash token before saving to DB
   const hashedToken = crypto
@@ -334,7 +335,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
   await newToken.save();
 
   // Construct reset url
-  const resetUrl = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+  const resetUrl = `${process.env.CLIENT_URL}/resetPassword/${resetToken}`;
 
   /**
    *
@@ -374,8 +375,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
     });
   } catch (error) {
     res.status(500);
-    // throw new Error('Email not sent, please try again!');
-    res.send(error.message);
+    throw new Error('Email not sent, please try again!');
   }
 });
 
@@ -386,7 +386,33 @@ const forgotPassword = asyncHandler(async (req, res) => {
  */
 
 const resetPassword = asyncHandler(async (req, res) => {
-  res.send('reset password');
+  const { password } = req.body;
+  const { resetToken } = req.params;
+
+  // hash token then compare to token in the DB
+  const hashedToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+
+  // Find token in DB
+  const userToken = await Token.findOne({
+    token: hashedToken,
+    expiresAt: { $gt: Date.now() },
+  });
+
+  if (!userToken) {
+    res.status(404);
+    throw new Error('Invalid or expired token');
+  }
+
+  const user = await User.findOne({ _id: userToken.userId });
+  user.password = password;
+  await user.save();
+
+  res.status(200).json({
+    message: 'Password reset successful, please login!',
+  });
 });
 
 module.exports = {
