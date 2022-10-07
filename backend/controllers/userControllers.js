@@ -385,6 +385,8 @@ const forgotPassword = asyncHandler(async (req, res) => {
  *
  */
 
+/* TODO - Fix Bug */
+
 const resetPassword = asyncHandler(async (req, res) => {
   const { password } = req.body;
   const { resetToken } = req.params;
