@@ -13,6 +13,7 @@ const morgan = require('morgan');
 const errorHandler = require('./middleware/errorHandler');
 const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/userRoutes');
+const productRoutes = require('./routes/productRoutes');
 
 // Initialize dotenv
 dotenv.config();
@@ -29,6 +30,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 
 app.use('/api/users', userRoutes);
+app.use('/api/products', productRoutes);
 
 // Routes
 app.get('/', (req, res) => {
