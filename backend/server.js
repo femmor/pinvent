@@ -12,6 +12,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const errorHandler = require('./middleware/errorHandler');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
 
@@ -28,6 +29,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(morgan('dev'));
 app.use(bodyParser.json());
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
