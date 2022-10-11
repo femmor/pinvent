@@ -15,6 +15,7 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
+const cloudinary = require('cloudinary').v2;
 
 // Initialize dotenv
 dotenv.config();
@@ -29,6 +30,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(morgan('dev'));
 app.use(bodyParser.json());
+
+// Cloudinary config
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
