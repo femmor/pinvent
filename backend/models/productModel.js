@@ -34,7 +34,7 @@ const productModel = mongoose.Schema(
       type: String,
       required: [true, 'Please add a description'],
     },
-    description: {
+    image: {
       type: Object,
       default: {},
     },
