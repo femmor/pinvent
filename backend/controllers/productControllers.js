@@ -51,6 +51,20 @@ const createProduct = asyncHandler(async (req, res) => {
   res.status(201).json(product);
 });
 
+const getProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({
+    user: req.user.id,
+  }).sort('-createdAt');
+
+  if (products.length > 0) {
+    res.status(200).json(products);
+  } else {
+    res.status(400);
+    throw new Error('No product found');
+  }
+});
+
 module.exports = {
   createProduct,
+  getProducts,
 };
