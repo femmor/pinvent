@@ -12,10 +12,11 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const errorHandler = require('./middleware/errorHandler');
 const cookieParser = require('cookie-parser');
+const cloudinary = require('cloudinary').v2;
 const path = require('path');
 const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
-const cloudinary = require('cloudinary').v2;
+const contactRoutes = require('./routes/contactRoutes');
 
 // Initialize dotenv
 dotenv.config();
@@ -42,6 +43,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/contactus', contactRoutes);
 
 // Routes
 app.get('/', (req, res) => {
