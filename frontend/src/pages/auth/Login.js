@@ -28,7 +28,7 @@ const Login = () => {
               required
             />
             <button class="--btn --btn-primary --btn-block" type="submit">
-              Submit
+              Login
             </button>
           </form>
 
