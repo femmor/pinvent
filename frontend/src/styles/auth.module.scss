@@ -18,9 +18,9 @@
       text-align: center;
     }
     form {
-      input[type="text"],
-      input[type="email"],
-      input[type="password"] {
+      input[type='text'],
+      input[type='email'],
+      input[type='password'] {
         display: block;
         font-size: 1.6rem;
         font-weight: 300;
@@ -40,6 +40,11 @@
 
         &:focus:invalid {
           border-bottom: 3px solid #ff7730;
+        }
+
+        .forgot {
+          margin-top: 20px;
+          text-align: center;
         }
       }
       .links {
