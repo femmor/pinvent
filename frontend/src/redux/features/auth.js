@@ -10,6 +10,6 @@ const auth = createSlice({
   reducers: {},
 });
 
-export const {} = auth.actions;
+// export const {} = auth.actions;
 
 export default auth.reducer;

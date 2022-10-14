@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { RiProductHuntLine } from 'react-icons/ri';
-import { NumberText } from '../../components';
+import { NumberText } from '../components';
 
-import './Home.scss';
+import '../styles/Home.scss';
 
-import heroImg from '../../assets/inv-img.png';
+import heroImg from '../assets/inv-img.png';
 
 const Home = () => {
   return (
