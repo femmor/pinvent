@@ -27,7 +27,7 @@ const Login = () => {
               placeholder="Enter password"
               required
             />
-            <button class="--btn --btn-primary --btn-block" type="submit">
+            <button className="--btn --btn-primary --btn-block" type="submit">
               Login
             </button>
           </form>
