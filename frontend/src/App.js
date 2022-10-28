@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Layout, Sidebar } from './components';
 import {
   Home,
   Login,
@@ -6,6 +7,7 @@ import {
   ResetPassword,
   ForgotPassword,
   NotFound,
+  Dashboard,
 } from './pages';
 
 const App = () => {
@@ -18,6 +20,16 @@ const App = () => {
         <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="*" element={<NotFound />} />
+        <Route
+          path="/dashboard"
+          element={
+            <Sidebar>
+              <Layout>
+                <Dashboard />
+              </Layout>
+            </Sidebar>
+          }
+        />
       </Routes>
     </Router>
   );
