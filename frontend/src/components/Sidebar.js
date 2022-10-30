@@ -1,13 +1,20 @@
-import '../styles/Sidebar.scss';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SidebarItem from './SidebarItem';
 import { RiProductHuntLine } from 'react-icons/ri';
 import { HiMenuAlt3 } from 'react-icons/hi';
 
 import menu from '../data/sidebar';
-import { useState } from 'react';
+import '../styles/Sidebar.scss';
 
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(true);
+
+  const navigate = useNavigate();
+
+  const goHome = () => {
+    navigate('/');
+  };
 
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -33,6 +40,7 @@ const Sidebar = ({ children }) => {
                 cursor: 'pointer',
               }}
               size={35}
+              onClick={goHome}
             />
           </div>
           <div
