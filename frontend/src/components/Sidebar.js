@@ -49,8 +49,18 @@ const Sidebar = ({ children }) => {
             />
           </div>
         </div>
+        {menu.map((item, index) => (
+          <SidebarItem key={index} item={item} isOpen={isOpen} />
+        ))}
       </div>
-      <main>{children}</main>
+      <main
+        style={{
+          paddingLeft: isOpen ? '230px' : '60px',
+          transition: 'all 0.5s',
+        }}
+      >
+        {children}
+      </main>
     </div>
   );
 };
