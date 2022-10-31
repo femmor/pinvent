@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 import { Layout, Sidebar } from './components';
 import {
   Home,
@@ -9,6 +11,10 @@ import {
   NotFound,
   Dashboard,
 } from './pages';
+
+import 'react-toastify/dist/ReactToastify.css';
+
+axios.defaults.withCredentials = true;
 
 const App = () => {
   return (
@@ -31,6 +37,12 @@ const App = () => {
           }
         />
       </Routes>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar
+        closeOnClick
+      />
     </Router>
   );
 };
