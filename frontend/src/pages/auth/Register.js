@@ -1,20 +1,31 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { TiUserAddOutline } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
 import { Card } from '../../components';
+import { toast } from 'react-toastify';
+import { validateEmail, registerUser } from '../../services/authService';
+import { SET_LOGIN, SET_NAME } from '../../redux/features/auth';
 
 import styles from '../../styles/auth.module.scss';
 
 const initialState = {
-  name: '',
-  email: '',
-  password: '',
-  confirmPassword: '',
+  name: 'Test Name',
+  email: 'test@test.com',
+  password: 'abc123',
+  confirmPassword: 'abc123',
 };
 
 const Register = () => {
   const [formData, setFormData] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Destructure form data
+  const { name, email, password, confirmPassword } = formData;
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -25,14 +36,44 @@ const Register = () => {
     });
   };
 
-  const register = e => {
+  const register = async e => {
     e.preventDefault();
 
-    console.log(formData);
-  };
+    if (!name || !email || !password) {
+      toast.error('All fields are required!');
+    }
 
-  // Destructure form data
-  const { name, email, password, confirmPassword } = formData;
+    if (!validateEmail(email)) {
+      toast.error('Please enter a valid email');
+    }
+
+    if (password.length < 6) {
+      toast.error('Password must be up to 6 characters');
+    }
+
+    if (password !== confirmPassword) {
+      toast.error('Passwords do not match');
+    }
+
+    const userData = {
+      name,
+      email,
+      password,
+    };
+
+    setIsLoading(true);
+
+    try {
+      const data = await registerUser(userData);
+      setIsLoading(false);
+      dispatch(SET_LOGIN(true));
+      dispatch(SET_NAME(data.name));
+      navigate('/dashboard');
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error.message);
+    }
+  };
 
   return (
     <div className={`container ${styles.auth}`}>
