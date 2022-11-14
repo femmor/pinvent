@@ -1,4 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { SET_LOGIN } from './redux/features/auth';
+import { getLoginStatus } from './services/authService';
 import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
 import { Layout, Sidebar } from './components';
@@ -17,6 +21,17 @@ import 'react-toastify/dist/ReactToastify.css';
 axios.defaults.withCredentials = true;
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const loginStatus = async () => {
+      const status = await getLoginStatus();
+      dispatch(SET_LOGIN(status));
+    };
+
+    loginStatus();
+  }, [dispatch]);
+
   return (
     <Router>
       <Routes>
@@ -38,7 +53,7 @@ const App = () => {
         />
       </Routes>
       <ToastContainer
-        position="bottom-center"
+        position="top-right"
         autoClose={3000}
         hideProgressBar
         closeOnClick

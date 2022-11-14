@@ -117,3 +117,21 @@ export const resetPassword = async (userData, resetToken) => {
     toast.error(message);
   }
 };
+
+/**
+ *
+ * Get Login Status
+ *
+ */
+export const getLoginStatus = async () => {
+  try {
+    const res = await axios.get(`${BACKEND_URL}/api/users/loginStatus`);
+    return res.data;
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    toast.error(message);
+  }
+};
