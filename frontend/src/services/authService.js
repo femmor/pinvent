@@ -8,6 +8,11 @@ export const validateEmail = email => {
   );
 };
 
+/**
+ *
+ * Register User
+ *
+ */
 export const registerUser = async userData => {
   try {
     const response = await axios.post(
@@ -19,6 +24,30 @@ export const registerUser = async userData => {
     );
     if (response.statusText === 'OK') {
       toast.success('User registered successfully!');
+    }
+    return response.data;
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    toast.error(message);
+  }
+};
+
+/**
+ *
+ * Login User
+ *
+ */
+export const loginUser = async userData => {
+  try {
+    const response = await axios.post(
+      `${BACKEND_URL}/api/users/login`,
+      userData
+    );
+    if (response.statusText === 'OK') {
+      toast.success('Login successful!');
     }
     return response.data;
   } catch (error) {
