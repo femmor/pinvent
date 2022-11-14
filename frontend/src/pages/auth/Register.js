@@ -9,6 +9,7 @@ import { validateEmail, registerUser } from '../../services/authService';
 import { SET_LOGIN, SET_NAME } from '../../redux/features/auth';
 
 import styles from '../../styles/auth.module.scss';
+import { Loader } from '../../components/Loader';
 
 const initialState = {
   name: 'Test Name',
@@ -77,6 +78,9 @@ const Register = () => {
 
   return (
     <div className={`container ${styles.auth}`}>
+      {isLoading && (
+        <Loader size={35} borderColor="white" borderTopColor="#007bff" />
+      )}
       <Card>
         <div className={styles.form}>
           <div className="--flex-center">
