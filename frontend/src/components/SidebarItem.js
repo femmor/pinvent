@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MdKeyboardArrowRight } from 'react-icons/md';
+import { MdKeyboardArrowRight } from '../utils/icons';
 import { NavLink } from 'react-router-dom';
 
 const activeLink = ({ isActive }) => (isActive ? 'active' : 'link');

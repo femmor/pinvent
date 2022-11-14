@@ -1,4 +1,4 @@
-import { AiOutlineUnlock } from 'react-icons/ai';
+import { AiOutlineUnlock } from '../../utils/icons';
 import { Link } from 'react-router-dom';
 import { Card } from '../../components';
 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { TiUserAddOutline } from 'react-icons/ti';
+import { TiUserAddOutline } from '../../utils/icons';
 import { Link } from 'react-router-dom';
 import { Card } from '../../components';
 import { toast } from 'react-toastify';

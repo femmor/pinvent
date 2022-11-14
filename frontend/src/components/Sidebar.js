@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SidebarItem from './SidebarItem';
-import { RiProductHuntLine } from 'react-icons/ri';
-import { HiMenuAlt3 } from 'react-icons/hi';
+import { RiProductHuntLine, HiMenuAlt3 } from '../utils/icons';
 
 import menu from '../data/sidebar';
 import '../styles/Sidebar.scss';

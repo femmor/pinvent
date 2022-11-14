@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { RiProductHuntLine } from 'react-icons/ri';
+import { RiProductHuntLine } from '../utils/icons';
 import { NumberText } from '../components';
 
 import '../styles/Home.scss';
