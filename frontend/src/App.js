@@ -14,6 +14,7 @@ import {
   ForgotPassword,
   NotFound,
   Dashboard,
+  AddProduct,
 } from './pages';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -47,6 +48,16 @@ const App = () => {
             <Sidebar>
               <Layout>
                 <Dashboard />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/add-product"
+          element={
+            <Sidebar>
+              <Layout>
+                <AddProduct />
               </Layout>
             </Sidebar>
           }
