@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ProductForm } from '../../components';
 import { selectIsLoading } from '../../redux/features/product/productSlice';
 import { createProduct } from '../../redux/features/product/productSlice';
+import { Loader } from '../../components/Loader';
 
 const initialState = {
   name: '',
@@ -69,20 +70,22 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="add-product">
+    <>
+      {isLoading && (
+        <Loader size={35} borderColor="white" borderTopColor="#007bff" />
+      )}
       <h3 className="--mt">Add New Product</h3>
       <ProductForm
         product={product}
         productImage={productImage}
         imagePreview={imagePreview}
         description={description}
-        isLoading={isLoading}
         setDescription={setDescription}
         handleChange={handleInputChange}
         handleImageChange={handleImageChange}
         saveProduct={saveProduct}
       />
-    </div>
+    </>
   );
 };
 export default AddProduct;
