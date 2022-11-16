@@ -6,3 +6,5 @@ export { default as Footer } from './Footer';
 export { default as Sidebar } from './Sidebar';
 export { default as SidebarItem } from './SidebarItem';
 export { default as ProductForm } from './ProductForm';
+export { default as DashboardSummary } from './DashboardSummary';
+export { default as ProductList } from './ProductList';

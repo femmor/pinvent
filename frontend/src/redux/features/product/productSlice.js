@@ -95,11 +95,4 @@ const productSlice = createSlice({
 
 export const { CALC_STORE_VALUE } = productSlice.actions;
 
-export const selectProduct = state => state.product.product;
-export const selectProducts = state => state.product.products;
-export const selectIsLoading = state => state.product.isLoading;
-export const selectIsSuccess = state => state.product.isSuccess;
-export const selectIsError = state => state.product.isError;
-export const selectMessage = state => state.product.message;
-
 export default productSlice.reducer;

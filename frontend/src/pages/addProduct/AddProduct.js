@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { ProductForm } from '../../components';
-import { selectIsLoading } from '../../redux/features/product/productSlice';
 import { createProduct } from '../../redux/features/product/productSlice';
 import { Loader } from '../../components/Loader';
 
@@ -15,12 +14,12 @@ const initialState = {
 };
 
 const AddProduct = () => {
+  const { isLoading } = useSelector(state => state.product);
   const [product, setProduct] = useState(initialState);
   const [imagePreview, setImagePreview] = useState(null);
   const [productImage, setProductImage] = useState('');
   const [description, setDescription] = useState('');
 
-  const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
