@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { Card } from '../../components';
 import { toast } from 'react-toastify';
 import { validateEmail, loginUser } from '../../services/authService';
-import { SET_LOGIN, SET_NAME, SET_USER } from '../../redux/features/auth';
+import { SET_LOGIN, SET_NAME } from '../../redux/features/auth';
 
 import styles from '../../styles/auth.module.scss';
 import { Loader } from '../../components/Loader';

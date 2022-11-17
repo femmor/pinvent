@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { Loader } from '../components/Loader';
 import { getAllProducts } from '../redux/features/product/productSlice';
 import useRedirectLoggedOut from '../hooks/useRedirectLoggedOut';
 import { selectIsLoggedIn } from '../redux/features/auth';
@@ -10,7 +9,7 @@ const Dashboard = () => {
   useRedirectLoggedOut('/login');
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  const { isLoading, isSuccess, isError, message, products } = useSelector(
+  const { isLoading, isError, message, products } = useSelector(
     state => state.product
   );
 
@@ -28,8 +27,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h2>Dashboard</h2>
-      <ProductList />
+      <ProductList products={products} isLoading={isLoading} />
     </div>
   );
 };

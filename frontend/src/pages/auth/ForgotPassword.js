@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { validateEmail } from '../../services/authService';
 import { forgotPassword } from '../../services/authService';
 import { AiOutlineMail } from '../../utils/icons';
@@ -13,8 +11,6 @@ import styles from '../../styles/auth.module.scss';
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
-  const navigate = useNavigate();
 
   const forgot = async e => {
     e.preventDefault();
