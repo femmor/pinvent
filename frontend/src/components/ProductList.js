@@ -1,4 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  FILTER_PRODUCTS,
+  selectFilteredProducts,
+} from '../redux/features/product/filterSlice';
 import { Loader } from '../components/Loader';
 import { FaEdit, FaTrashAlt, AiOutlineEye } from '../utils/icons';
 import Search from './Search';
@@ -7,6 +12,10 @@ import '../styles/productList.scss';
 
 const ProductList = ({ products, isLoading }) => {
   const [search, setSearch] = useState('');
+
+  const filteredProducts = useSelector(selectFilteredProducts);
+
+  const dispatch = useDispatch();
 
   const onChange = e => {
     if (search.length === 0) {
@@ -22,6 +31,10 @@ const ProductList = ({ products, isLoading }) => {
     }
     return `${text.slice(0, n)}...`;
   };
+
+  useEffect(() => {
+    dispatch(FILTER_PRODUCTS({ products, search }));
+  }, [products, search, dispatch]);
 
   return (
     <div className="product-list">
@@ -57,7 +70,7 @@ const ProductList = ({ products, isLoading }) => {
                 </tr>
               </thead>
               <tbody>
-                {products?.map((product, index) => {
+                {filteredProducts?.map((product, index) => {
                   const { id, name, category, price, quantity } = product;
                   return (
                     <tr key={id}>
