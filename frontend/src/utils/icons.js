@@ -6,6 +6,7 @@ import { HiMenuAlt3 } from 'react-icons/hi';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { AiOutlineEye } from 'react-icons/ai';
+import { BiSearch } from 'react-icons/bi';
 
 export {
   BiLogIn,
@@ -18,4 +19,5 @@ export {
   FaEdit,
   FaTrashAlt,
   AiOutlineEye,
+  BiSearch,
 };

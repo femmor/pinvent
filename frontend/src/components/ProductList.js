@@ -1,9 +1,21 @@
+import { useState } from 'react';
 import { Loader } from '../components/Loader';
 import { FaEdit, FaTrashAlt, AiOutlineEye } from '../utils/icons';
+import Search from './Search';
 
 import '../styles/productList.scss';
 
 const ProductList = ({ products, isLoading }) => {
+  const [search, setSearch] = useState('');
+
+  const onChange = e => {
+    if (search.length === 0) {
+      setSearch('');
+    }
+
+    setSearch(e.target.value);
+  };
+
   const shortenText = (text, n) => {
     if (text.length <= n) {
       return text;
@@ -20,7 +32,7 @@ const ProductList = ({ products, isLoading }) => {
             <h3>Inventory Items</h3>
           </span>
           <span>
-            <h3>Search Products...</h3>
+            <Search value={search} onChange={e => onChange(e)} />
           </span>
         </div>
 
