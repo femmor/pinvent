@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {
   CALC_STORE_VALUE,
+  CALC_OUT_OF_STOCK,
   selectTotalStoreValue,
+  selectOutOfStock,
 } from '../redux/features/product/productSlice';
 import {
   AiFillDollarCircle,
@@ -21,9 +23,14 @@ const outOfStockIcon = <BsCartX size={40} color="#fff" />;
 const DashboardSummary = ({ products }) => {
   const dispatch = useDispatch();
   const totalStoreValue = useSelector(selectTotalStoreValue);
+  const outOfStock = useSelector(selectOutOfStock);
 
   useEffect(() => {
     dispatch(CALC_STORE_VALUE(products));
+  }, [dispatch, products]);
+
+  useEffect(() => {
+    dispatch(CALC_OUT_OF_STOCK(products));
   }, [dispatch, products]);
 
   return (
@@ -45,7 +52,7 @@ const DashboardSummary = ({ products }) => {
         <InfoBox
           icon={outOfStockIcon}
           title="Out of Stock"
-          count={0}
+          count={outOfStock}
           bgColor="card3"
         />
         <InfoBox
