@@ -3,7 +3,7 @@ import { getAllProducts } from '../redux/features/product/productSlice';
 import useRedirectLoggedOut from '../hooks/useRedirectLoggedOut';
 import { selectIsLoggedIn } from '../redux/features/auth';
 import { useEffect } from 'react';
-import { ProductList } from '../components';
+import { DashboardSummary, ProductList } from '../components';
 
 const Dashboard = () => {
   useRedirectLoggedOut('/login');
@@ -27,6 +27,7 @@ const Dashboard = () => {
 
   return (
     <div>
+      <DashboardSummary products={products} />
       <ProductList products={products} isLoading={isLoading} />
     </div>
   );
