@@ -10,3 +10,4 @@ export { default as DashboardSummary } from './DashboardSummary';
 export { default as ProductList } from './ProductList';
 export { default as Search } from './Search';
 export { default as InfoBox } from './InfoBox';
+export { default as ProductDetails } from './ProductDetails';

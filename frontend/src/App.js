@@ -5,7 +5,7 @@ import { SET_LOGIN } from './redux/features/auth';
 import { getLoginStatus } from './services/authService';
 import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
-import { Layout, Sidebar } from './components';
+import { Layout, ProductDetails, Sidebar } from './components';
 import {
   Home,
   Login,
@@ -59,6 +59,16 @@ const App = () => {
             <Sidebar>
               <Layout>
                 <AddProduct />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/products/:id"
+          element={
+            <Sidebar>
+              <Layout>
+                <ProductDetails />
               </Layout>
             </Sidebar>
           }
