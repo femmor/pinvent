@@ -18,6 +18,7 @@ import {
 } from './pages';
 
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 axios.defaults.withCredentials = true;
 
