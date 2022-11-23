@@ -2,8 +2,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   CALC_STORE_VALUE,
   CALC_OUT_OF_STOCK,
+  CALC_NUM_OF_CATEGORIES,
   selectTotalStoreValue,
   selectOutOfStock,
+  selectCategories,
 } from '../redux/features/product/productSlice';
 import {
   AiFillDollarCircle,
@@ -24,13 +26,12 @@ const DashboardSummary = ({ products }) => {
   const dispatch = useDispatch();
   const totalStoreValue = useSelector(selectTotalStoreValue);
   const outOfStock = useSelector(selectOutOfStock);
+  const categories = useSelector(selectCategories);
 
   useEffect(() => {
     dispatch(CALC_STORE_VALUE(products));
-  }, [dispatch, products]);
-
-  useEffect(() => {
     dispatch(CALC_OUT_OF_STOCK(products));
+    dispatch(CALC_NUM_OF_CATEGORIES(products));
   }, [dispatch, products]);
 
   return (
@@ -58,7 +59,7 @@ const DashboardSummary = ({ products }) => {
         <InfoBox
           icon={categoryIcon}
           title="All Categories"
-          count={0}
+          count={categories.length}
           bgColor="card4"
         />
       </div>
