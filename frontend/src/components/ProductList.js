@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   FILTER_PRODUCTS,
   selectFilteredProducts,
@@ -22,6 +23,7 @@ const ProductList = ({ products, isLoading }) => {
   const filteredProducts = useSelector(selectFilteredProducts);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onChange = e => {
     if (search.length === 0) {
@@ -128,7 +130,11 @@ const ProductList = ({ products, isLoading }) => {
                       <td>${(price * quantity).toLocaleString()}</td>
                       <td className="icons">
                         <span>
-                          <AiOutlineEye size={25} color="purple" />
+                          <AiOutlineEye
+                            size={25}
+                            color="purple"
+                            onClick={() => navigate(`/products/${id}`)}
+                          />
                         </span>
                         <span>
                           <FaEdit size={20} color="green" />
