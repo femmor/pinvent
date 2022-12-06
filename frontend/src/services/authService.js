@@ -135,3 +135,21 @@ export const getLoginStatus = async () => {
     toast.error(message);
   }
 };
+
+/**
+ *
+ * Get User Profile
+ *
+ */
+export const getUser = async () => {
+  try {
+    const res = await axios.get(`${BACKEND_URL}/api/users/user`);
+    return res.data;
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    toast.error(message);
+  }
+};
