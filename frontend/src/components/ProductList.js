@@ -137,7 +137,11 @@ const ProductList = ({ products, isLoading }) => {
                           />
                         </span>
                         <span>
-                          <FaEdit size={20} color="green" />
+                          <FaEdit
+                            size={20}
+                            color="green"
+                            onClick={() => navigate(`/edit-product/${id}`)}
+                          />
                         </span>
                         <span onClick={() => confirmDelete(id)}>
                           <FaTrashAlt size={20} color="red" />
