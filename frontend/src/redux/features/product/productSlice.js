@@ -90,6 +90,25 @@ export const getProduct = createAsyncThunk(
   }
 );
 
+// Update Product
+export const updateProduct = createAsyncThunk(
+  'products/update',
+  async ({ id, formData }, thunkAPI) => {
+    try {
+      return await productService.updateProduct(id, formData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      console.log(message);
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 const productSlice = createSlice({
   name: 'product',
   initialState,
@@ -143,6 +162,7 @@ const productSlice = createSlice({
   },
   extraReducers: builder => {
     builder
+
       // Create Product
       .addCase(createProduct.pending, state => {
         state.isLoading = true;
@@ -160,6 +180,7 @@ const productSlice = createSlice({
         state.message = payload;
         toast.error(payload);
       })
+
       // Get All Products
       .addCase(getAllProducts.pending, state => {
         state.isLoading = true;
@@ -176,6 +197,7 @@ const productSlice = createSlice({
         state.message = payload;
         toast.error(payload);
       })
+
       // Delete Product
       .addCase(deleteProduct.pending, state => {
         state.isLoading = true;
@@ -192,6 +214,7 @@ const productSlice = createSlice({
         state.message = payload;
         toast.error(payload);
       })
+
       // Get Product
       .addCase(getProduct.pending, state => {
         state.isLoading = true;
@@ -203,6 +226,23 @@ const productSlice = createSlice({
         state.product = payload;
       })
       .addCase(getProduct.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = payload;
+        toast.error(payload);
+      })
+
+      // Update Product
+      .addCase(updateProduct.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(updateProduct.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        toast.success('Product updated successfully!');
+      })
+      .addCase(updateProduct.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.isError = true;
         state.message = payload;
