@@ -257,5 +257,7 @@ export const { CALC_STORE_VALUE, CALC_OUT_OF_STOCK, CALC_NUM_OF_CATEGORIES } =
 export const selectTotalStoreValue = state => state.product.totalStoreValue;
 export const selectOutOfStock = state => state.product.outOfStock;
 export const selectCategories = state => state.product.categories;
+export const selectIsLoading = state => state.product.isLoading;
+export const selectProduct = state => state.product.product;
 
 export default productSlice.reducer;
