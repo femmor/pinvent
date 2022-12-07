@@ -27,11 +27,11 @@ const auth = createSlice({
     },
     SET_USER: (state, { payload }) => {
       const profile = payload;
-      state.user.name = profile.user.name;
-      state.user.email = profile.user.email;
-      state.user.phone = profile.user.phone;
-      state.user.bio = profile.user.bio;
-      state.user.photo = profile.user.photo;
+      state.user.name = profile.name;
+      state.user.email = profile.email;
+      state.user.phone = profile.phone;
+      state.user.bio = profile.bio;
+      state.user.photo = profile.photo;
     },
   },
   extraReducers: {},
