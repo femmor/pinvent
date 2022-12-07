@@ -17,6 +17,7 @@ import {
   AddProduct,
   EditProduct,
   Profile,
+  EditProfile,
 } from './pages';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -91,6 +92,16 @@ const App = () => {
             <Sidebar>
               <Layout>
                 <Profile />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/edit-profile"
+          element={
+            <Sidebar>
+              <Layout>
+                <EditProfile />
               </Layout>
             </Sidebar>
           }

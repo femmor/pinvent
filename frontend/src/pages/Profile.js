@@ -46,6 +46,7 @@ const Profile = () => {
               <img src={profile?.photo} alt={profile?.name} />
             </span>
             <span className="profile-data">
+              <h4>Profile Information</h4>
               <p>
                 <b>Name: </b>
                 {profile?.name}

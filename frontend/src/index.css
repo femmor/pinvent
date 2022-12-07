@@ -356,6 +356,7 @@ p {
 .--form-control {
   font-size: 1.6rem;
   font-weight: 300;
+  padding: 1rem;
 }
 
 .--form-control > * {
