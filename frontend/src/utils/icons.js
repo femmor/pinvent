@@ -9,9 +9,16 @@ import {
 import { RiProductHuntLine } from 'react-icons/ri';
 import { HiMenuAlt3 } from 'react-icons/hi';
 import { MdKeyboardArrowRight } from 'react-icons/md';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import {
+  FaEdit,
+  FaTrashAlt,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaTwitter,
+} from 'react-icons/fa';
 import { BiSearch, BiCategory } from 'react-icons/bi';
 import { BsCart4, BsCartX } from 'react-icons/bs';
+import { GoLocation } from 'react-icons/go';
 
 export {
   BiLogIn,
@@ -29,4 +36,8 @@ export {
   BiCategory,
   BsCart4,
   BsCartX,
+  GoLocation,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaTwitter,
 };

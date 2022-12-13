@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
+
 export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 export const validateEmail = email => {
@@ -159,9 +160,12 @@ export const getUser = async () => {
  * Update Profile
  *
  */
-export const updateUser = async (formData) => {
+export const updateUser = async formData => {
   try {
-    const res = await axios.patch(`${BACKEND_URL}/api/users/updateUser`, formData);
+    const res = await axios.patch(
+      `${BACKEND_URL}/api/users/updateUser`,
+      formData
+    );
     return res.data;
   } catch (error) {
     const message =

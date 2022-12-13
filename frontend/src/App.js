@@ -18,6 +18,7 @@ import {
   EditProduct,
   Profile,
   EditProfile,
+  Contact
 } from './pages';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -102,6 +103,16 @@ const App = () => {
             <Sidebar>
               <Layout>
                 <EditProfile />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/contact-us"
+          element={
+            <Sidebar>
+              <Layout>
+                <Contact />
               </Layout>
             </Sidebar>
           }
