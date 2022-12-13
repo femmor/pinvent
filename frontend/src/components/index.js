@@ -11,3 +11,4 @@ export { default as ProductList } from './ProductList';
 export { default as Search } from './Search';
 export { default as InfoBox } from './InfoBox';
 export { default as ProductDetails } from './ProductDetails';
+export { default as ChangePassword } from './ChangePassword';

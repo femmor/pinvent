@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectUser } from '../redux/features/auth';
-import { updateUser } from "../services/authService"
+import { updateUser } from '../services/authService';
 import { Loader } from '../components/Loader';
-import { Card } from '../components';
+import { Card, ChangePassword } from '../components';
 import '../styles/Profile.scss';
 import { Link } from 'react-router-dom';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const EditProfile = () => {
   const user = useSelector(selectUser);
@@ -78,20 +78,19 @@ const EditProfile = () => {
         const imageData = await response.json();
         imgUrl = imageData.url.toString();
       }
-        
+
       // Save Profile
       const formData = {
         name: profile.name,
         phone: profile.phone,
         bio: profile.bio,
-        photo: profileImage ? imgUrl : profile.photo
-      }
+        photo: profileImage ? imgUrl : profile.photo,
+      };
 
-      const data = await updateUser(formData)
-      toast.success("User updated!")
-      navigate("/profile")
-      setIsLoading(false)
-
+      const data = await updateUser(formData);
+      toast.success('User updated!');
+      navigate('/profile');
+      setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
       toast.error(error.message);
@@ -160,6 +159,8 @@ const EditProfile = () => {
             </span>
           </form>
         </Card>
+
+        <ChangePassword />
       </>
     </div>
   );
