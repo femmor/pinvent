@@ -1,13 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { selectUser } from '../redux/features/auth';
+import { updateUser } from "../services/authService"
 import { Loader } from '../components/Loader';
 import { Card } from '../components';
-import { selectUser } from '../redux/features/auth';
 import '../styles/Profile.scss';
 import { Link } from 'react-router-dom';
+import {toast} from 'react-toastify';
 
 const EditProfile = () => {
   const user = useSelector(selectUser);
+  const navigate = useNavigate();
+
+  const { email } = user;
+
+  useEffect(() => {
+    if (!email) {
+      navigate('/profile');
+    }
+  }, [email, navigate]);
 
   const initialState = {
     name: user?.name,
@@ -37,8 +49,53 @@ const EditProfile = () => {
     setProfileImage(imgUrl);
   };
 
-  const saveProfile = e => {
+  const saveProfile = async e => {
     e.preventDefault();
+
+    setIsLoading(true);
+
+    try {
+      let imgUrl;
+      if (
+        profileImage &&
+        (profileImage.type === 'image/jpeg' ||
+          profileImage.type === 'image/jpg' ||
+          profileImage.type === 'image/png')
+      ) {
+        const image = new FormData();
+        image.append('file', profileImage);
+        image.append('cloud_name', 'femmycodes');
+        image.append('upload_preset', 'cd8urikg');
+
+        // First save image to cloudinary
+        const response = await fetch(
+          'https://api.cloudinary.com/v1_1/femmycodes/image/upload',
+          {
+            method: 'post',
+            body: image,
+          }
+        );
+        const imageData = await response.json();
+        imgUrl = imageData.url.toString();
+      }
+        
+      // Save Profile
+      const formData = {
+        name: profile.name,
+        phone: profile.phone,
+        bio: profile.bio,
+        photo: profileImage ? imgUrl : profile.photo
+      }
+
+      const data = await updateUser(formData)
+      toast.success("User updated!")
+      navigate("/profile")
+      setIsLoading(false)
+
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(error.message);
+    }
   };
 
   return (
@@ -51,7 +108,7 @@ const EditProfile = () => {
           <span className="profile-photo">
             <img src={user?.photo} alt={user?.name} />
           </span>
-          <form className="--form-control">
+          <form className="--form-control" onSubmit={saveProfile}>
             <span className="profile-data">
               <h4>Edit Profile Information</h4>
               <p>
@@ -78,7 +135,6 @@ const EditProfile = () => {
                 <label>Phone: </label>
                 <input
                   type="tel"
-                  pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                   name="phone"
                   value={profile?.phone}
                   onChange={handleInputChange}
